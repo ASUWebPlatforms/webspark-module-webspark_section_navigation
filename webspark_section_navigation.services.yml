@@ -1,6 +1,6 @@
 services:
   webspark_section_navigation.event_subscriber:
-    class: Drupal\dept_section_navigation\EventSubscriber\WebSparkSectionNavigationDecorator
+    class: Drupal\webspark_section_navigation\EventSubscriber\WebSparkSectionNavigationDecorator
     decorates: lb_section_navigation.event_subscriber
     decoration_priority: 1
     arguments: ['@plugin.manager.layout_builder.section_storage']
