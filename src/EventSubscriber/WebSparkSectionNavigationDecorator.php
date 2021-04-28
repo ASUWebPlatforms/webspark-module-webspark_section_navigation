@@ -22,12 +22,14 @@ class WebSparkSectionNavigationDecorator extends SectionNavigationSubscriber {
     ];
     foreach ($section->getComponents() as $componentUuid => $component) {
       $config = $component->get('configuration');
-      if (isset($config['provider']) && $config['provider']=='block_content') {
-        $id_parts = explode(':', $config['id']);
-        $uuid = $id_parts[1];
-        $block = \Drupal::service('entity.repository')->loadEntityByUuid('block_content', $uuid);
-        $isAnchor = (int)$block->field_anchor->value;
 
+      if (isset($config['provider']) && $config['provider']=='layout_builder') {
+        $renderArray = $component->toRenderArray($contexts);
+        $content = $renderArray['content'];
+        $block = $content['#block_content'];
+        $isAnchor = (int)$block->field_anchor->value;
+        $icon = $block->field_icon->icon_name;
+        $icon_style = $block->field_icon->style;
         if ($isAnchor !== 1) {
           continue;
         }
@@ -40,6 +42,8 @@ class WebSparkSectionNavigationDecorator extends SectionNavigationSubscriber {
           ->toRenderable();
 
         $build['#links'][$componentUuid]['#weight'] = $component->getWeight();
+        $build['#links'][$componentUuid]['#icon'] = $icon;
+        $build['#links'][$componentUuid]['#icon_style'] = $icon_style;
       }
     }
     uasort($build['#links'], [SortArray::class, 'sortByWeightProperty']);
