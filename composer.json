@@ -1,0 +1,14 @@
+{
+  "name": "asuwebplatforms/webspark-module-webspark_section_navigation",
+  "description": "Alter the section navigation to be more configurable",
+  "type": "drupal-module",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Daniela Duarte",
+      "email": "daniela.duarte@deptagency.com"
+    }
+  ],
+  "require": {},
+  "version": "1.0.0"
+}
